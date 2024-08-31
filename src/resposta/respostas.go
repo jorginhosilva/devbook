@@ -9,6 +9,8 @@ import (
 
 // JSON retorna uma resposta em JSON para a requisição
 func JSON(w http.ResponseWriter, statusCode int, dados interface{}) {
+	// O comando abaixo quer dizer que, o formato do conteúdo é em JSON
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(statusCode)
 
 	// Conversão de dados para JSON
