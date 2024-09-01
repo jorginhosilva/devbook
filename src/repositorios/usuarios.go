@@ -84,10 +84,9 @@ func (repositorio Usuarios) Buscar(nomeOuNick string) ([]modelos.Usuario, error)
 // BuscaPorID traz um usuário do banco de dados
 func (repositorio Usuarios) BuscarPorID(ID uint64) (modelos.Usuario, error) {
 	linhas, erro := repositorio.db.Query(
-		"select id, nome, nick, email, criadoEm, from usuarios where id = ?",
+		"select id, nome, nick, email, criadoEm from usuarios where id = ?",
 		ID,
 	)
-	// Para mandarmos um usuário vazio, usamos o comando abaixo
 	if erro != nil {
 		return modelos.Usuario{}, erro
 	}

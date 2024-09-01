@@ -81,7 +81,7 @@ func BuscarUsuario(w http.ResponseWriter, r *http.Request) {
 	// mux.Vars() é fundamental para extrair informações de parâmetros nomeados presentes em URLs.
 	parametros := mux.Vars(r)
 
-	usuarioID, erro := strconv.ParseUint(parametros["usuarioID"], 10, 64)
+	usuarioID, erro := strconv.ParseUint(parametros["usuarioId"], 10, 64)
 	if erro != nil {
 		respostas.Erro(w, http.StatusBadRequest, erro)
 		return
