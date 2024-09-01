@@ -13,9 +13,11 @@ func JSON(w http.ResponseWriter, statusCode int, dados interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(statusCode)
 
-	// Conversão de dados para JSON
-	if erro := json.NewEncoder(w).Encode(dados); erro != nil {
-		log.Fatal(erro)
+	if dados != nil {
+		// Conversão de dados para JSON
+		if erro := json.NewEncoder(w).Encode(dados); erro != nil {
+			log.Fatal(erro)
+		}
 	}
 }
 
