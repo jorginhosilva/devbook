@@ -1,7 +1,7 @@
 package modelos
 
 import (
-	"api/seguranca"
+	"api/src/seguranca"
 	"errors"
 	"strings"
 	"time"
@@ -29,9 +29,9 @@ func (usuario *Usuario) Preparar(etapa string) error {
 	if erro := usuario.formatar(etapa); erro != nil {
 		return erro
 	}
-
-	return nil
 	
+	return nil
+
 }
 
 func (usuario *Usuario) validar(etapa string) error {
@@ -65,14 +65,12 @@ func (usuario *Usuario) formatar(etapa string) error {
 	usuario.Nick = strings.TrimSpace(usuario.Nick)
 	usuario.Email = strings.TrimSpace(usuario.Email)
 
-	// Lembrando que == é um operador de comparação
-	if etapa == "cadastro" {
+	if etapa == "cadasto" {
 		senhaComHash, erro := seguranca.Hash(usuario.Senha)
 		if erro != nil {
 			return erro
 		}
-		// Lembrando que ao usar o sinal de = nessa situação,
-		// significa que é uma atribuição
+
 		usuario.Senha = string(senhaComHash)
 
 	}

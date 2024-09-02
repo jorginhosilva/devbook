@@ -9,7 +9,7 @@ require (
 
 require github.com/badoux/checkmail v1.2.4
 
-require golang.org/x/crypto v0.26.0 // indirect
+require golang.org/x/crypto v0.26.0 
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
