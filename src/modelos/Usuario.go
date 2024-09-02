@@ -1,9 +1,12 @@
 package modelos
 
 import (
+	"api/seguranca"
 	"errors"
 	"strings"
 	"time"
+
+	"github.com/badoux/checkmail"
 )
 
 // Usuário sendo escrito com U maiúsculo significa que ele vai ser importado!
@@ -23,9 +26,12 @@ func (usuario *Usuario) Preparar(etapa string) error {
 		return erro
 	}
 
-	usuario.formatar()
-	return nil
+	if erro := usuario.formatar(etapa); erro != nil {
+		return erro
+	}
 
+	return nil
+	
 }
 
 func (usuario *Usuario) validar(etapa string) error {
@@ -42,6 +48,10 @@ func (usuario *Usuario) validar(etapa string) error {
 		return errors.New("o email é obrigatório e não pode estar em branco")
 	}
 
+	if erro := checkmail.ValidateFormat(usuario.Email); erro != nil {
+		return errors.New("o e-mail inserido é inválido")
+	}
+
 	if etapa == "cadastro" && usuario.Senha == "" {
 		return errors.New("a senha é obrigatória e não pode estar em branco")
 	}
@@ -50,8 +60,23 @@ func (usuario *Usuario) validar(etapa string) error {
 
 }
 
-func (usuario *Usuario) formatar() {
+func (usuario *Usuario) formatar(etapa string) error {
 	usuario.Nome = strings.TrimSpace(usuario.Nome)
 	usuario.Nick = strings.TrimSpace(usuario.Nick)
 	usuario.Email = strings.TrimSpace(usuario.Email)
+
+	// Lembrando que == é um operador de comparação
+	if etapa == "cadastro" {
+		senhaComHash, erro := seguranca.Hash(usuario.Senha)
+		if erro != nil {
+			return erro
+		}
+		// Lembrando que ao usar o sinal de = nessa situação,
+		// significa que é uma atribuição
+		usuario.Senha = string(senhaComHash)
+
+	}
+
+	return nil
+
 }
