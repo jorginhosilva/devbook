@@ -2,6 +2,7 @@ package autenticacao
 
 import (
 	"api/src/config"
+	"net/http"
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
@@ -16,3 +17,11 @@ func CriarToken(usuarioID uint64) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, permissoes)
 	return token.SignedString([]byte(config.SecretKey))
 }
+
+func ValidatToken(r *http.Request) error {
+	return nil
+}
+
+//func extrairToken(r *http.Request) string {
+	//token := r.Header.Get("authorization")
+//}
