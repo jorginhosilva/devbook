@@ -233,3 +233,8 @@ func (repositorio Usuarios) BuscarSeguidores(usuarioID uint64) ([]modelos.Usuari
 
 	return usuarios, nil
 }
+
+// BuscarSeguindo traz todos os usuários que um determinado usuário está seguindo
+func (repositorio Usuarios) BuscarSeguindo(usuarioID uint64) ([]modelos.Usuario, error) {
+	
+}
