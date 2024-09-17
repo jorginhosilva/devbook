@@ -10,16 +10,17 @@ import (
 // Rota com R maiúsculo significa que vai ser importado
 // Rota representa todas as rotas da API
 type Rota struct {
-	URI string
-	Metodo string
-	Funcao func(http.ResponseWriter, *http.Request)
-	RequerAutenticacao bool
+	URI 				string
+	Metodo 				string
+	Funcao 				func(http.ResponseWriter, *http.Request)
+	RequerAutenticacao 	bool
 }
 
 // Configurar coloca todas as rotas dentro do router
 func Configurar(r *mux.Router) *mux.Router {
 	rotas := rotasUsuarios
 	rotas = append(rotas, rotaLogin)
+	rotas = append(rotas, rotasPublicacoes...)
 
 	for _, rota := range rotas {
 		if rota.RequerAutenticacao {
