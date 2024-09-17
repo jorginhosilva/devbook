@@ -8,7 +8,7 @@ import (
 )
 
 // Rota com R maiúsculo significa que vai ser importado
-// Rota representa todas as rotas da API
+// Rota representa todas as rotas da API (todo o caminho que a API recorre)
 type Rota struct {
 	URI 				string
 	Metodo 				string
